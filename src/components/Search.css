@@ -1,0 +1,32 @@
+.search-container {
+    width: 20%;
+    background-color: white;
+    border-radius: 25px;
+    margin-top: 2%;
+    margin-left: 2%;
+    cursor: pointer;
+    overflow: hidden;
+    height: 40px;
+    display: flex;
+    align-items: center;
+}
+
+.search-text {
+    font-size: 1.5rem;
+    width: 92%;
+    display: flex;
+    flex-direction: row;
+}   
+
+.search-icon {
+    height: 28px;
+    width: 44px;
+    margin-right: 3%;
+}
+
+.search-text-input {
+    border: none;
+    width: 80%;
+    font-size: 1.0rem;
+    outline: none;
+}

@@ -1,0 +1,7 @@
+.content-container {
+    height: 97vh;
+    background-color: #645BFF;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
