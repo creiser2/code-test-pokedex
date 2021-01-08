@@ -9,6 +9,7 @@
     height: 40px;
     display: flex;
     align-items: center;
+    margin-bottom: 2%;
 }
 
 .search-text {
