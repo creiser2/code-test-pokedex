@@ -1,0 +1,109 @@
+.details-container {
+    height: 100vh;
+    position: absolute;
+    width: 100%;
+    background-color: #645BFF;
+    top: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.img-card {
+    width: 30%;
+    height: 100%;
+    background-color: white;
+    border-radius:  20px;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    overflow: hidden;
+}
+
+.pokemon-img {
+    width: 100px;
+    height: auto;
+}
+
+.stats-container {
+    width: 70%;
+    height: 60%;
+    margin-top: 8%;
+}
+
+.r1 {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    height: 30%;
+    justify-content: space-around;
+    align-items: center;
+    overflow: scroll;
+}
+
+.r2 {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    height: 30%;
+    justify-content: space-around;
+    align-items: center; 
+    overflow: scroll;
+}
+
+.hw-card {
+    background-color: white;
+    color: black;
+    width: 30%;
+    height: 60%;
+    border-radius:  20px;
+    font-size: 1.5rem;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+    overflow: scroll;
+}
+
+.strength {
+    background-color: white;
+    width: 100%;
+    height: 50%;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+    overflow: scroll;
+}
+
+.strength-dot {
+    display: inherit;
+    align-items: inherit;
+}
+
+.evolution-container {
+    color: white;
+    overflow: scroll;
+    display: flex;
+    flex-direction: row;
+}
+
+.back-btn {
+    color: black;
+    cursor: pointer;
+    background-color: white;
+    border-radius: 2px;
+    margin-top: 3%;
+}
+
+.pokemon-evo-card {
+    background-color: white;
+    border-radius: 5px;
+    align-items: center;
+    color: black;
+    text-align: center;
+    margin: 10px;
+    cursor: pointer;
+}

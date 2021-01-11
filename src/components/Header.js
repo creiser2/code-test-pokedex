@@ -1,9 +1,9 @@
 import "./Header.css";
 
-function Header() {
+function Header(props) {
     return (
         <div className="header-container">
-           Pokédex
+           {props.title}
         </div>
     )
 }

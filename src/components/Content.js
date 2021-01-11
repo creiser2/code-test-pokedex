@@ -2,7 +2,17 @@ import "./Content.css"
 import { Component } from "react";
 import Search from "./Search.js";
 import Filter from "./Filter.js";
+import Details from "./Details.js";
 import getDotForType from "./common/util";
+
+import {
+    BrowserRouter as Router,
+    Switch,
+    Route,
+    Link,
+} from "react-router-dom";
+
+
 /**
  * Wrapper function for main display
  */
@@ -12,36 +22,37 @@ class Content extends Component {
         this.state = { 
             searchValue: "",
             fullPokeDex: [],
-            pokeMap: null,
             strengthFilters: null,
             weaknessFilters: null,
          };
     }
 
     componentDidMount = async () => {
-        const data = await fetch("https://raw.githubusercontent.com/Biuni/PokemonGO-Pokedex/master/pokedex.json")
-        const json = (await data.json()).pokemon;
+        const dex = (await fetch("https://raw.githubusercontent.com/Biuni/PokemonGO-Pokedex/master/pokedex.json").then(data => data.json())).pokemon
 
         this.setState({
-            fullPokeDex: json,
+            fullPokeDex: dex,
             strengthFilters: new Map(),
             weaknessFilters: new Map()
         })
-        this.convertDexToMap(json)
     }
 
     renderPokedex = () => {
-        const pokeList = this.getFilteredPokemon().map((pokemon) =>
-            <div className="pokemon-cell" key={pokemon.num.toString()}>
-                {pokemon.name}
-                {pokemon.type.map(type => {
-                    return getDotForType(type)
-                })}
-            </div>
-        );
-        return (
-            pokeList
-        );
+        return this.getFilteredPokemon().map((pokemon) => 
+            <Link to={{
+                pathname: `/${pokemon.num}`,
+                state: {
+                    pokemon: pokemon
+                }
+            }} key={pokemon.num.toString()}>
+                <div className="pokemon-cell" key={pokemon.num.toString()}>
+                    {pokemon.name}
+                    {pokemon.type.map(type => {
+                        return getDotForType(type)
+                    })}
+                </div>
+            </Link>
+        )
     }
 
     getFilteredPokemon = () => {
@@ -62,7 +73,6 @@ class Content extends Component {
                     return true
                 } else {
                     for (const key of this.state.weaknessFilters.keys()) {
-                        console.log(key)
                         if (!pokemon.weaknesses.includes(key)) {
                             return false
                         }
@@ -74,23 +84,6 @@ class Content extends Component {
             }
         });
     }
-
-    /**
-     * 
-     * @param {JSON} pokemons 
-     * This function creates a map keyed by the pokemon num, allows for faster lookups for next evolution & prev evolution, passed via props -> details
-     */
-    convertDexToMap = (pokemons) => {
-        const pokeMap = new Map();
-
-        for (const pokemon of pokemons) {
-            pokeMap.set(pokemon.num, pokemon)
-        }
-
-        this.setState({
-            pokeMap: pokeMap
-        })
-    } 
 
     searchChanged = (event) => {
         this.setState({
@@ -141,19 +134,23 @@ class Content extends Component {
             strengthFilters: temp
         })
     }
-
     render() {
         return (
-            <div className="content-container">
-                <div className="filter-search-container">
-                    <Search searchValue={this.state.searchValue} searchChanged={this.searchChanged} />
-                    <Filter type="Strength" filterChanged={this.strengthFilterChanged} />
-                    <Filter type="Weakness" filterChanged={this.weaknessFilterChanged} />
+            <Router>
+                <div className="content-container">
+                    <div className="filter-search-container">
+                        <Search searchValue={this.state.searchValue} searchChanged={this.searchChanged} />
+                        <Filter type="Strength" filterChanged={this.strengthFilterChanged} />
+                        <Filter type="Weakness" filterChanged={this.weaknessFilterChanged} />
+                    </div>
+                    <div className="pokemon-container">
+                        {this.renderPokedex()}
+                    </div>
                 </div>
-                <div className="pokemon-container">
-                    {this.renderPokedex()}
-                </div>
-            </div>
+                <Switch>
+                    <Route path="/:id" children={<Details />} />
+                </Switch>
+            </Router>
         );
     }
 }

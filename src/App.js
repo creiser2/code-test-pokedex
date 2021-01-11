@@ -5,7 +5,7 @@ import Content from "./components/Content.js"
 function App() {
   return (
     <div className="container">
-     <Header />
+     <Header title={"Pokédex"}/>
      <Content />
     </div>
   );

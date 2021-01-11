@@ -7,7 +7,7 @@ function Filter(props) {
     function renderBoxes() {
         return [...Colors].map(type => {
             return (
-                <div className="checkbox-container">
+                <div className="checkbox-container" key={type[0].toString()}>
                     {getDotForType(type[0])}
                     <label className="checkbox-name">
                         {type[0]}
